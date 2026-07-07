@@ -1,11 +1,11 @@
-# Mon premier RAG
+# RAG minimal
 
 Mini-TP RAG realise en binome avec ChromaDB, sentence-transformers, Groq et un agent moderateur.
 
 ## Structure du projet
 
 ```text
-mon-premier-rag/
+RAG-minimal/
 ├── src/
 │   ├── config.py
 │   ├── vector_db.py
@@ -22,34 +22,29 @@ mon-premier-rag/
 │   ├── test_moderator.py
 │   └── test_rag.py
 ├── docs/
-│   └── 05_mini_TP_demo_mon_premier_RAG.pdf
+│   ├── 05_mini_TP_demo_mon_premier_RAG.pdf
+│   └── ROADMAP_YACINE.md
 ├── .env.example
 ├── .gitignore
-├── requirements.txt
-└── README.md
+└── requirements.txt
 ```
+
+## Installation
+
+```powershell
+cd C:\Users\yacch\Documents\first_rag
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+Copy-Item .env.example .env
+```
+
+Ajouter ensuite la cle Groq dans `.env`.
 
 ## Repartition
 
-### Partie 1 - Binome
+### Yacine - Partie 2
 
-Responsabilites :
-
-- `src/rag.py`
-- `prompts/rag_system_prompt.txt`
-- appel Groq
-- pipeline `answer_question()`
-- tests finaux RAG
-
-Branche de base : `dev/binome-partie-1`
-
-Branches conseillees :
-
-- `feature/rag-pipeline`
-- `feature/groq-generation`
-- `test/rag-final-questions`
-
-### Partie 2 - Toi
+Branche de base : `dev/yacine-partie-2`
 
 Responsabilites :
 
@@ -60,31 +55,33 @@ Responsabilites :
 - embeddings sentence-transformers
 - moderation JSON
 
-Branche de base : `dev/moi-partie-2`
+### Adrien - Partie 1
 
-Branches conseillees :
+Branche de base : `dev/adrien-partie-1`
 
-- `feature/vector-db`
-- `feature/moderator-agent`
-- `test/vector-db-retrieval`
+Responsabilites :
+
+- `src/rag.py`
+- `prompts/rag_system_prompt.txt`
+- appel Groq principal
+- pipeline `answer_question()`
+- tests finaux RAG
 
 ## Workflow Git
 
-Avant une nouvelle fonctionnalite :
-
 ```powershell
-git switch dev/moi-partie-2
+git switch dev/yacine-partie-2
 git pull
-git switch -c feature/vector-db
+git switch -c feature/yacine-vector-db
 ```
 
 Commit propre :
 
 ```powershell
 git status
-git add src/vector_db.py tests/test_vector_db.py
+git add src/vector_db.py prompts/moderator_system_prompt.txt
 git commit -m "feature: add vector database retrieval"
-git push --set-upstream origin feature/vector-db
+git push --set-upstream origin feature/yacine-vector-db
 ```
 
 Conventions de branches :
@@ -97,15 +94,13 @@ Conventions de branches :
 
 Eviter `git add *`. Ajouter seulement les fichiers concernes.
 
-## GitHub
+## Interfaces entre les deux parties
 
-Creer un repository GitHub vide, puis lier ce depot local :
+Yacine expose :
 
-```powershell
-git remote add origin https://github.com/<user>/mon-premier-rag.git
-git push -u origin main
-git push -u origin dev/moi-partie-2
-git push -u origin dev/binome-partie-1
+```python
+chunks = vector_db.retrieve(question, n=3)
+moderation = moderator.moderate(question)
 ```
 
-Chaque fonctionnalite doit passer par une Pull Request relue par l'autre membre du binome.
+Adrien utilise ces deux resultats pour construire le prompt RAG et bloquer les prompt injections avant l'appel au LLM principal.
