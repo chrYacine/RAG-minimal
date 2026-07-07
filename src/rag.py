@@ -9,7 +9,7 @@ Reponds uniquement avec les informations du contexte.
 Si la reponse n'est pas dans le contexte, reponds que tu ne sais pas d'apres le corpus fourni.
 
 Contexte :
-{{chunks}}
+{{Chunks}}
 
 Question :
 {{question}}
@@ -54,7 +54,11 @@ class RAG:
         """Build the final prompt sent to the language model."""
         template = self._load_prompt_template()
         formatted_chunks = self._format_chunks(chunks)
-        return template.replace("{{chunks}}", formatted_chunks).replace("{{question}}", question)
+        return (
+            template.replace("{{Chunks}}", formatted_chunks)
+            .replace("{{chunks}}", formatted_chunks)
+            .replace("{{question}}", question)
+        )
 
     def _moderate(self, question: str) -> dict[str, Any]:
         if self.moderator is None:
