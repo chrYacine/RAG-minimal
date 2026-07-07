@@ -1,35 +1,90 @@
-# Python
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
+*$py.class
 *.pyo
 *.pyd
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Test / coverage / quality caches
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
 .pytest_cache/
 .mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytype/
 .ruff_cache/
-.coverage
-htmlcov/
+.hypothesis/
+cover/
+coverage.xml
+*.cover
+*.py.cover
 
-# Virtual environments
-.venv/
-venv/
-env/
-
-# Secrets
+# Virtual environments and secrets
 .env
 .env.*
 !.env.example
+.envrc
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
 
-# Local generated data
+# Local vector stores and generated data
 chroma_db/
 *.sqlite3
 *.db
+db.sqlite3
+db.sqlite3-journal
 
-# Original files kept outside the organized project tree
+# Notebooks and local tools
+.ipynb_checkpoints/
+.streamlit/secrets.toml
+tempCodeRunnerFile.py
+
+# Project files kept outside the organized tree
 /05_corpus_rag.csv
 /05_mini_TP_demo_mon_premier_RAG.pdf
 
 # IDE / OS
 .vscode/
 .idea/
+.spyderproject
+.spyproject
+.ropeproject
 .DS_Store
 Thumbs.db
